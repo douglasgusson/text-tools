@@ -1,5 +1,5 @@
 # Text Tools
-> Inspired by the Swiss Army Knife of word processing [Text Pieces](https://github.com/liferooter/textpieces)
+> Inspired by the Swiss Army Knife of text processing [Text Pieces](https://github.com/liferooter/textpieces)
 
 ![Text Tools](./screenshots/text-tools-csv-to-json.png)
 
