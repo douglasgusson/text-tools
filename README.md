@@ -1,5 +1,5 @@
 # Text Tools
-> React + TypeScript + Vite
+> Inspired by the Swiss Army Knife of word processing [Text Pieces](https://github.com/liferooter/textpieces)
 
 ![Text Tools](./screenshots/text-tools-csv-to-json.png)
 

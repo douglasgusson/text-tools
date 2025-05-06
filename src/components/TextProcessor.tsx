@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { WorkerType, getWorker } from "../workers";
+import { WorkerType, getWorker, workersLabels } from "../workers";
 
 export function TextProcessor() {
   const [input, setInput] = useState("");
@@ -42,7 +42,12 @@ export function TextProcessor() {
           value={workerType}
           onChange={(e) => setWorkerType(e.target.value as WorkerType)}
         >
-          <option value={WorkerType.csvToJson}>CSV → JSON</option>
+          <option value={WorkerType.csvToJson}>
+            {workersLabels[WorkerType.csvToJson]}
+          </option>
+          <option value={WorkerType.prettifyJson}>
+            {workersLabels[WorkerType.prettifyJson]}
+          </option>
         </select>
       </div>
       <div className="flex h-full">
