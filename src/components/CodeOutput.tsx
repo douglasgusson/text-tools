@@ -13,7 +13,7 @@ export function CodeOutput({ code }: { code: string }) {
         borderRadius: 0,
         border: 0,
         overflowX: "scroll",
-        maxWidth: "50vw",
+        width: "100%",
       }}
     >
       {code}

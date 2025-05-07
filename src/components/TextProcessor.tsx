@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { WorkerType, getWorker, workersLabels } from "../workers";
 import { CodeOutput } from "./CodeOutput";
-import { xonokai as theme } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { CopyToClipboardButton } from "./CopyToClipboardButton";
 
 export function TextProcessor() {
   const [input, setInput] = useState("");
@@ -70,7 +70,7 @@ export function TextProcessor() {
           </button>
         </div>
       </div>
-      <div className="flex h-full">
+      <div className="flex flex-col md:flex-row h-full">
         <div className="flex flex-col flex-1 h-full">
           <textarea
             className="flex-1 bg-zinc-800 text-zinc-200 font-mono font-medium p-4 outline-none resize-none border-0 text-sm leading-relaxed"
@@ -86,13 +86,18 @@ export function TextProcessor() {
               }
             }}
           />
-          <div className="flex justify-between items-center text-xs text-gray-400 bg-zinc-900 p-2">
-            <div>Caracteres: {input.length}</div>
+          <div className="flex gap-4 h-10 items-center text-xs text-gray-400 bg-zinc-900 p-2">
+            <span>input</span>
+            <span>caracteres: {input.length}</span>
           </div>
         </div>
-        <div className="flex flex-col flex-1 shadow-md">
-          <div className="flex flex-col flex-1 h-full">
+        <div className="flex flex-col flex-1 md:max-w-1/2 shadow-md">
+          <div className="flex flex-col flex-1 w-full h-full">
             <CodeOutput code={output} />
+          </div>
+          <div className="flex gap-4 h-10 justify-between items-center text-xs text-gray-400 bg-zinc-900 p-2">
+            <span>output</span>
+            <CopyToClipboardButton text={output} />
           </div>
         </div>
       </div>
