@@ -38,7 +38,7 @@ export function TextProcessor() {
         </div>
 
         <select
-          className="flex-1 max-w-2xs bg-zinc-700 text-zinc-300 text-sm mx-auto px-2 py-1 rounded border-0 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+          className="flex-1 max-w-2xs bg-zinc-700 text-zinc-300 text-sm mx-auto px-2 py-1 rounded border-0 focus:ring-1 focus:ring-blue-500 focus:outline-none appearance-none"
           value={workerType}
           onChange={(e) => setWorkerType(e.target.value as WorkerType)}
         >
