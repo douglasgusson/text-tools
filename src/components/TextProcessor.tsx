@@ -1,14 +1,12 @@
 import { useRef, useState } from "react";
-import { WorkerType, getWorker, workersLabels } from "../workers";
+import { type WorkerType, getWorker, workers } from "../workers";
 import { CodeOutput } from "./CodeOutput";
 import { CopyToClipboardButton } from "./CopyToClipboardButton";
 
 export function TextProcessor() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
-  const [workerType, setWorkerType] = useState<WorkerType>(
-    WorkerType.csvToJson,
-  );
+  const [workerType, setWorkerType] = useState<WorkerType>("csvToJson");
   const workerRef = useRef<Worker | null>(null);
 
   const handleProcess = () => {
@@ -44,12 +42,11 @@ export function TextProcessor() {
           value={workerType}
           onChange={(e) => setWorkerType(e.target.value as WorkerType)}
         >
-          <option value={WorkerType.csvToJson}>
-            {workersLabels[WorkerType.csvToJson]}
-          </option>
-          <option value={WorkerType.prettifyJson}>
-            {workersLabels[WorkerType.prettifyJson]}
-          </option>
+          {Object.entries(workers).map(([key, value]) => (
+            <option key={key} value={key}>
+              {value}
+            </option>
+          ))}
         </select>
 
         <div className="flex flex-row-reverse gap-2 flex-1">

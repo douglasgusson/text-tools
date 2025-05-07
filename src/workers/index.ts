@@ -1,23 +1,21 @@
 import CsvToJsonWorker from "./csvToJson.worker?worker";
 import PrettifyJsonWorker from "./prettifyJson.worker?worker";
 
-export enum WorkerType {
-  csvToJson = "csvToJson",
-  prettifyJson = "prettifyJson",
-}
-
-export const workersLabels: Record<WorkerType, string> = {
+export const workers = {
   csvToJson: "CSV → JSON",
   prettifyJson: "Prettify JSON",
 };
 
+export type WorkerType = keyof typeof workers;
+
+type WorkerConstructor = new (options?: { name?: string }) => Worker;
+
+const workersMap: Record<WorkerType, WorkerConstructor> = {
+  csvToJson: CsvToJsonWorker,
+  prettifyJson: PrettifyJsonWorker,
+};
+
 export const getWorker = (type: WorkerType): Worker => {
-  switch (type) {
-    case WorkerType.csvToJson:
-      return new CsvToJsonWorker();
-    case WorkerType.prettifyJson:
-      return new PrettifyJsonWorker();
-    default:
-      throw new Error("Worker não implementado");
-  }
+  const constructor = workersMap[type];
+  return new constructor();
 };
