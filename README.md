@@ -11,18 +11,18 @@ Text Tools is a collection of text processing tools that can be used to manipula
 1. Install the dependencies:
 
 ```bash
-bun install
+bun install # or `npm install`
 ```
 
 2. Run the app:
 
 ```bash
-bun run dev
+bun run dev # or `npm run dev`
 ```
 or
 
 ```bash
-bun run dev:host
+bun run dev:host # or `npm run dev:host`
 ```
 
 > Note: `dev:host` will allow you to access the app from other devices on your local network. You can find the host address in the terminal output after running the command.
