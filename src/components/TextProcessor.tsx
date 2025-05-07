@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
 import { WorkerType, getWorker, workersLabels } from "../workers";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { dracula as theme } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export function TextProcessor() {
   const [input, setInput] = useState("");
@@ -69,26 +71,35 @@ export function TextProcessor() {
         </div>
       </div>
       <div className="flex h-full">
-        <textarea
-          className="flex-1 h-full bg-zinc-800 text-zinc-200 font-mono p-4 outline-none resize-y border-0 focus:ring-2 focus:ring-blue-500 text-sm leading-relaxed"
-          rows={10}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          spellCheck="false"
-          onKeyDown={(e) => {
-            // Detecta Ctrl+Enter
-            if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
-              e.preventDefault();
-              handleProcess();
-            }
-          }}
-        />
-        <pre className="flex-1 bg-stone-800 text-stone-200 font-mono p-4">
-          {output}
-        </pre>
-      </div>
-      <div className="flex justify-between items-center text-xs text-gray-400 bg-gray-800 p-2">
-        <div>Caracteres: {input.length}</div>
+        <div className="flex flex-col flex-1 h-full">
+          <textarea
+            className="flex-1 bg-zinc-800 text-zinc-200 font-mono font-medium p-4 outline-none resize-y border-0 text-sm leading-relaxed"
+            rows={10}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            spellCheck="false"
+            onKeyDown={(e) => {
+              // Detecta Ctrl+Enter
+              if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+                handleProcess();
+              }
+            }}
+          />
+          <div className="flex justify-between items-center text-xs text-gray-400 bg-gray-800 p-2">
+            <div>Caracteres: {input.length}</div>
+          </div>
+        </div>
+        <div className="flex-1">
+          <SyntaxHighlighter
+            language="json"
+            showLineNumbers
+            style={theme}
+            customStyle={{ margin: 0, height: "100%", borderRadius: 0 }}
+          >
+            {output}
+          </SyntaxHighlighter>
+        </div>
       </div>
     </div>
   );
