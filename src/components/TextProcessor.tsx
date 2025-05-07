@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { WorkerType, getWorker, workersLabels } from "../workers";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { CodeOutput } from "./CodeOutput";
 import { xonokai as theme } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export function TextProcessor() {
@@ -19,7 +19,7 @@ export function TextProcessor() {
     const worker = getWorker(workerType);
     worker.onmessage = (e) => {
       const { success, result, error } = e.data;
-      setOutput(success ? result : `Erro: ${error}`);
+      setOutput(success ? result : `Error: ${error}`);
     };
     workerRef.current = worker;
     worker.postMessage({ text: input });
@@ -73,7 +73,7 @@ export function TextProcessor() {
       <div className="flex h-full">
         <div className="flex flex-col flex-1 h-full">
           <textarea
-            className="flex-1 bg-zinc-800 text-zinc-200 font-mono font-medium p-4 outline-none resize-y border-0 text-sm leading-relaxed"
+            className="flex-1 bg-zinc-800 text-zinc-200 font-mono font-medium p-4 outline-none resize-none border-0 text-sm leading-relaxed"
             rows={10}
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -90,20 +90,10 @@ export function TextProcessor() {
             <div>Caracteres: {input.length}</div>
           </div>
         </div>
-        <div className="flex-1">
-          <SyntaxHighlighter
-            language="json"
-            showLineNumbers
-            style={theme}
-            customStyle={{
-              margin: 0,
-              height: "100%",
-              borderRadius: 0,
-              border: 0,
-            }}
-          >
-            {output}
-          </SyntaxHighlighter>
+        <div className="flex flex-col flex-1 shadow-md">
+          <div className="flex flex-col flex-1 h-full">
+            <CodeOutput code={output} />
+          </div>
         </div>
       </div>
     </div>
