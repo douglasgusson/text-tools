@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { WorkerType, getWorker, workersLabels } from "../workers";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { dracula as theme } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { xonokai as theme } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export function TextProcessor() {
   const [input, setInput] = useState("");
@@ -32,7 +32,7 @@ export function TextProcessor() {
 
   return (
     <div className="flex flex-col w-screen h-screen">
-      <div className="bg-gray-800 p-2 flex items-center">
+      <div className="bg-zinc-900 p-2 flex items-center">
         <div className="flex space-x-2 flex-1">
           <div className="w-3 h-3 rounded-full bg-red-500"></div>
           <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
@@ -86,7 +86,7 @@ export function TextProcessor() {
               }
             }}
           />
-          <div className="flex justify-between items-center text-xs text-gray-400 bg-gray-800 p-2">
+          <div className="flex justify-between items-center text-xs text-gray-400 bg-zinc-900 p-2">
             <div>Caracteres: {input.length}</div>
           </div>
         </div>
@@ -95,7 +95,12 @@ export function TextProcessor() {
             language="json"
             showLineNumbers
             style={theme}
-            customStyle={{ margin: 0, height: "100%", borderRadius: 0 }}
+            customStyle={{
+              margin: 0,
+              height: "100%",
+              borderRadius: 0,
+              border: 0,
+            }}
           >
             {output}
           </SyntaxHighlighter>
