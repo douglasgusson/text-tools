@@ -2,12 +2,14 @@ import CsvToJsonWorker from "./csvToJson.worker?worker";
 import PrettifyJsonWorker from "./prettifyJson.worker?worker";
 import Base64EncodeWorker from "./base64Encode.worker?worker";
 import Base64DecodeWorker from "./base64Decode.worker?worker";
+import SortLinesWorker from "./sortLines.worker?worker";
 
 export const workers = {
   csvToJson: "CSV → JSON",
   prettifyJson: "Prettify JSON",
-  base64Encode: "Base64 Encode",
-  base64Decode: "Base64 Decode",
+  base64Encode: "Base 64 encode",
+  base64Decode: "Base 64 decode",
+  sortLines: "Sort lines",
 };
 
 export type WorkerType = keyof typeof workers;
@@ -19,9 +21,10 @@ const workersMap: Record<WorkerType, WorkerConstructor> = {
   prettifyJson: PrettifyJsonWorker,
   base64Encode: Base64EncodeWorker,
   base64Decode: Base64DecodeWorker,
+  sortLines: SortLinesWorker,
 };
 
 export const getWorker = (type: WorkerType): Worker => {
-  const constructor = workersMap[type];
-  return new constructor();
+  const WorkerClass = workersMap[type];
+  return new WorkerClass();
 };
